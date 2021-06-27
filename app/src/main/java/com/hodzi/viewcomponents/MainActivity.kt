@@ -36,7 +36,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateProgress() {
         currentProgress %= 1
-        progressEditText.setText(currentProgress.toString())
         customProgress.setProgress(currentProgress)
+        progressEditText.setText(customProgress.getProgress().toString())
     }
 }

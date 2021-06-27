@@ -23,6 +23,7 @@ class CustomProgressBar @JvmOverloads constructor(
     private val progressPaint: Paint = getDefaultPaint()
     private val backgroundPaint: Paint = getDefaultPaint()
     private val textPaint = Paint().apply {
+        isAntiAlias = true
         textAlign = Paint.Align.CENTER
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
     }
@@ -35,7 +36,7 @@ class CustomProgressBar @JvmOverloads constructor(
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomProgressBar, defStyleAttr, 0)
-        setProgress(typedArray.getFloat(R.styleable.CustomProgressBar_progress_value, 0f), force = true)
+        setProgress(typedArray.getFloat(R.styleable.CustomProgressBar_progress_value, 20f), force = true)
 
         val progressBackgroundColor = typedArray.getColor(
             R.styleable.CustomProgressBar_progress_background_color,
@@ -87,17 +88,14 @@ class CustomProgressBar @JvmOverloads constructor(
         return progress
     }
 
-    fun setProgress(
-        @FloatRange(from = 0.0, to = 1.0) progress: Float,
-        force: Boolean = false,
-    ) {
-        this.progress = progress
+    fun setProgress(@FloatRange(from = 0.0, to = 1.0) progress: Float, force: Boolean = false) {
+        this.progress = progress.coerceIn(0f, 1f)
         if (force) {
             stopAnimation()
-            animationProgress = progress
+            animationProgress = this.progress
             invalidate()
         } else {
-            animateView(progress)
+            animateView(this.progress)
         }
     }
 
