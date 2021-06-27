@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
     android:orientation="vertical"
     android:paddingStart="16dp"
     android:paddingTop="16dp"
@@ -16,7 +17,10 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:progress_stroke_width="40dp"
+        app:progress_value="0.4"
+        app:text_size="40sp" />
 
     <EditText
         android:id="@+id/progress_value"

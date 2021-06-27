@@ -22,7 +22,9 @@ class MainActivity : AppCompatActivity() {
         updateProgressButton = findViewById(R.id.update_progress)
         plusProgressButton = findViewById(R.id.plus_progress)
         updateProgressButton.setOnClickListener {
-            currentProgress = parseFloat(progressEditText.text.toString())
+            val textProgress = progressEditText.text.toString()
+            val progressValue = textProgress.toFloatOrNull()
+            progressValue?.let { currentProgress = it }
             updateProgress()
         }
         plusProgressButton.setOnClickListener {
