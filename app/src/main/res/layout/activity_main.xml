@@ -1,42 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical"
-    android:paddingStart="16dp"
-    android:paddingTop="16dp"
-    android:paddingEnd="16dp"
-    android:paddingBottom="16dp"
     tools:context=".MainActivity">
 
-    <com.hodzi.viewcomponents.CustomProgressBar
-        android:id="@+id/custom_progress"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:progress_stroke_width="40dp"
-        app:progress_value="0.4"
-        app:text_size="40sp" />
-
-    <EditText
-        android:id="@+id/progress_value"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/black" />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <Button
-        android:id="@+id/update_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Update progress" />
+        <com.hodzi.viewcomponents.CustomProgressBar
+            android:id="@+id/custom_progress_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:progress_value="0.4" />
 
-    <Button
-        android:id="@+id/plus_progress"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="+10 progress" />
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <EditText
+            android:id="@+id/progress_value"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+        <Button
+            android:id="@+id/update_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Update progress" />
+
+        <Button
+            android:id="@+id/plus_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+10 progress" />
+
+        <com.hodzi.viewcomponents.CustomProgressBar
+            android:id="@+id/custom_progress_test_1"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.hodzi.viewcomponents.CustomProgressBar
+            android:id="@+id/custom_progress_test_2"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="View with with custom stroke width" />
+
+        <com.hodzi.viewcomponents.CustomProgressBar
+            android:id="@+id/custom_progress_test_3"
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            app:progress_stroke_width="30dp"
+            app:text_size="40sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+</ScrollView>

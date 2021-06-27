@@ -10,7 +10,6 @@ import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
 import com.hodzi.viewcomponents.utils.dp
-import com.hodzi.viewcomponents.utils.sp
 
 
 @SuppressLint("ViewConstructor")
@@ -28,11 +27,14 @@ class CustomProgressBar @JvmOverloads constructor(
         typeface = Typeface.create(Typeface.DEFAULT, Typeface.BOLD)
     }
 
+    private var previousHeight = 0
     private var valueAnimator: ValueAnimator? = null
-    private var rectangle: RectF? = null
-    private var margin: Float
+    private var rectangle: RectF = RectF()
+    private var rectangleMargin: Float = 0f
     private var progress: Float = 0f
     private var animationProgress: Float = progress
+    private var defaultProgressStrokeWidth: Float = 0f
+    private var defaultTextStrokeWidth: Float = 0f
 
     init {
         val typedArray = context.obtainStyledAttributes(attrs, R.styleable.CustomProgressBar, defStyleAttr, 0)
@@ -44,43 +46,43 @@ class CustomProgressBar @JvmOverloads constructor(
         )
         backgroundPaint.color = progressBackgroundColor
 
-        val textColor = typedArray.getColor(
-            R.styleable.CustomProgressBar_text_color,
-            ContextCompat.getColor(context, R.color.progress_background)
-        )
-        textPaint.color = textColor
-
-        val progressWidth = typedArray.getDimension(
-            R.styleable.CustomProgressBar_progress_stroke_width,
-            20.dp()
-        )
-        backgroundPaint.strokeWidth = progressWidth
-        progressPaint.strokeWidth = progressWidth
-        val textSize = typedArray.getDimension(
+        defaultTextStrokeWidth = typedArray.getDimension(
             R.styleable.CustomProgressBar_text_size,
-            20.sp()
+            0f
         )
-        textPaint.textSize = textSize
+        defaultProgressStrokeWidth = typedArray.getDimension(
+            R.styleable.CustomProgressBar_progress_stroke_width,
+            0f
+        )
         typedArray.recycle()
 
-        progressPaint.apply {
-            shader = SweepGradient(
-                500f,
-                1500f,
-                ContextCompat.getColor(context, R.color.progress_color_start),
-                ContextCompat.getColor(context, R.color.progress_color_end)
-            )
-        }
-        margin = 23.dp()
+        updateStrokeWidth()
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, widthMeasureSpec)
+
+        val widthSpec = MeasureSpec.getSize(widthMeasureSpec)
+        val heightSpec = MeasureSpec.getSize(widthMeasureSpec)
+
+        updateShaderIfNeed(heightSpec)
+        textPaint.shader = progressPaint.shader
+
+        rectangle.set(
+            0f + rectangleMargin,
+            0f + rectangleMargin,
+            widthSpec.toFloat() - rectangleMargin,
+            heightSpec.toFloat() - rectangleMargin
+        )
+        updateStrokeWidth(widthSpec)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        if (rectangle == null) {
-            rectangle = RectF(0f + margin, 0f + margin, width.toFloat() - margin, height.toFloat() - margin)
+        canvas.drawArc(rectangle, START_ANGLE, SWEEP_ANGLE, false, backgroundPaint)
+        if (animationProgress != 0f) {
+            canvas.drawArc(rectangle, START_ANGLE, animationProgress * SWEEP_ANGLE, false, progressPaint)
         }
-        canvas.drawArc(rectangle!!, START_ANGLE, SWEEP_ANGLE, false, backgroundPaint)
-        canvas.drawArc(rectangle!!, START_ANGLE, animationProgress * SWEEP_ANGLE, false, progressPaint)
         canvas.drawText("${(animationProgress * 100).toInt()}%", width.toFloat() / 2, height.toFloat() / 2, textPaint)
     }
 
@@ -90,13 +92,56 @@ class CustomProgressBar @JvmOverloads constructor(
 
     fun setProgress(@FloatRange(from = 0.0, to = 1.0) progress: Float, force: Boolean = false) {
         this.progress = progress.coerceIn(0f, 1f)
+        stopAnimation()
         if (force) {
-            stopAnimation()
             animationProgress = this.progress
             invalidate()
         } else {
             animateView(this.progress)
         }
+    }
+
+    private fun updateStrokeWidth(wight: Int = 0) {
+        updateProgressStrokeWidth(wight)
+        updateTextStrokeWidth(wight)
+    }
+
+    private fun updateProgressStrokeWidth(wight: Int) {
+        val progressWidth = if (defaultProgressStrokeWidth == 0f) {
+            wight / 10f
+        } else {
+            defaultProgressStrokeWidth
+        }
+        backgroundPaint.strokeWidth = progressWidth
+        progressPaint.strokeWidth = progressWidth
+        rectangleMargin = progressWidth / 2 + 1
+    }
+
+    private fun updateTextStrokeWidth(wight: Int) {
+        val textWidth = if (defaultTextStrokeWidth == 0f) {
+            wight / 10f
+        } else {
+            defaultTextStrokeWidth
+        }
+        textPaint.textSize = textWidth
+    }
+
+    private fun updateShaderIfNeed(heightSpec: Int) {
+        if (previousHeight == heightSpec)
+            return
+
+        previousHeight = heightSpec
+        val gradient = LinearGradient(
+            0f,
+            y,
+            0f,
+            y + (heightSpec / 2),
+            ContextCompat.getColor(context, R.color.progress_color_end),
+            ContextCompat.getColor(context, R.color.progress_color_start),
+            Shader.TileMode.MIRROR
+        )
+        progressPaint.shader = gradient
+        textPaint.shader = gradient
     }
 
     private fun getDefaultPaint(): Paint {
@@ -109,7 +154,6 @@ class CustomProgressBar @JvmOverloads constructor(
     }
 
     private fun animateView(finishValue: Float) {
-        stopAnimation()
         valueAnimator = ValueAnimator.ofFloat(animationProgress, finishValue).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = ANIMATION_DURATION
