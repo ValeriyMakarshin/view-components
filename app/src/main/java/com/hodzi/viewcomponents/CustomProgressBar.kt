@@ -4,12 +4,18 @@ import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
+import android.provider.Settings
 import android.util.AttributeSet
 import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
 import com.hodzi.viewcomponents.utils.dp
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
+import kotlin.math.abs
 
 
 @SuppressLint("ViewConstructor")
@@ -29,6 +35,7 @@ class CustomProgressBar @JvmOverloads constructor(
 
     private var previousHeight = 0
     private var valueAnimator: ValueAnimator? = null
+    private var jobAnimation: Job? = null
     private var rectangle: RectF = RectF()
     private var rectangleMargin: Float = 0f
     private var progress: Float = 0f
@@ -154,6 +161,37 @@ class CustomProgressBar @JvmOverloads constructor(
     }
 
     private fun animateView(finishValue: Float) {
+        val durationScale =
+            Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
+        if (durationScale == 0f) {
+            startFlowAnimation(finishValue)
+        } else {
+            startNativeAnimation(finishValue)
+        }
+    }
+    private fun startFlowAnimation(finishValue: Float) {
+        val flowProgress: Flow<Float> = flow {
+            val start = (animationProgress * 100).toInt()
+            val end = (finishValue * 100).toInt()
+            if (start == end) {
+                return@flow
+            }
+
+            val range = if (start < end) (start + 1)..end else ((start - 1) downTo end)
+            val size = abs(end - start)
+            val durationStep = ANIMATION_DURATION / size
+            for (i in range) {
+                delay(durationStep)
+                emit((i / 100f))
+            }
+        }
+
+        jobAnimation = CoroutineScope(Dispatchers.Main).launch {
+            flowProgress.collect(::animationUpdate)
+        }
+    }
+
+    private fun startNativeAnimation(finishValue: Float) {
         valueAnimator = ValueAnimator.ofFloat(animationProgress, finishValue).apply {
             interpolator = AccelerateDecelerateInterpolator()
             duration = ANIMATION_DURATION
@@ -165,7 +203,14 @@ class CustomProgressBar @JvmOverloads constructor(
         }
     }
 
+    private fun animationUpdate(newValue: Float) {
+        animationProgress = newValue
+        invalidate()
+    }
+
     private fun stopAnimation() {
+        jobAnimation?.cancel()
+        jobAnimation = null
         valueAnimator?.cancel()
         valueAnimator = null
     }
