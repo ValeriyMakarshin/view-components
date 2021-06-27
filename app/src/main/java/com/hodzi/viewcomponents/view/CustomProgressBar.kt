@@ -1,4 +1,4 @@
-package com.hodzi.viewcomponents
+package com.hodzi.viewcomponents.view
 
 import android.animation.ValueAnimator
 import android.annotation.SuppressLint
@@ -10,7 +10,9 @@ import android.view.View
 import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
-import com.hodzi.viewcomponents.utils.dp
+import com.hodzi.viewcomponents.R
+import com.hodzi.viewcomponents.animation.BaseValueAnimation
+import com.hodzi.viewcomponents.animation.ValueAnimationCombiner
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -34,8 +36,7 @@ class CustomProgressBar @JvmOverloads constructor(
     }
 
     private var previousHeight = 0
-    private var valueAnimator: ValueAnimator? = null
-    private var jobAnimation: Job? = null
+    private var animation: BaseValueAnimation? = null
     private var rectangle: RectF = RectF()
     private var rectangleMargin: Float = 0f
     private var progress: Float = 0f
@@ -160,58 +161,17 @@ class CustomProgressBar @JvmOverloads constructor(
     }
 
     private fun animateView(finishValue: Float) {
-        val durationScale =
-            Settings.Global.getFloat(context.contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f)
-        if (durationScale == 0f) {
-            startFlowAnimation(finishValue)
-        } else {
-            startNativeAnimation(finishValue)
-        }
-    }
-    private fun startFlowAnimation(finishValue: Float) {
-        val flowProgress: Flow<Float> = flow {
-            val start = (animationProgress * 100).toInt()
-            val end = (finishValue * 100).toInt()
-            if (start == end) {
-                return@flow
-            }
-
-            val range = if (start < end) (start + 1)..end else ((start - 1) downTo end)
-            val size = abs(end - start)
-            val durationStep = ANIMATION_DURATION / size
-            for (i in range) {
-                delay(durationStep)
-                emit((i / 100f))
-            }
-        }
-
-        jobAnimation = CoroutineScope(Dispatchers.Main).launch {
-            flowProgress.collect(::animationUpdate)
-        }
-    }
-
-    private fun startNativeAnimation(finishValue: Float) {
-        valueAnimator = ValueAnimator.ofFloat(animationProgress, finishValue).apply {
-            interpolator = AccelerateDecelerateInterpolator()
-            duration = ANIMATION_DURATION
-            addUpdateListener {
-                animationProgress = it.animatedValue as Float
+        animation = ValueAnimationCombiner(context).apply {
+            startAnimation(animationProgress, finishValue, ANIMATION_DURATION) { newValue ->
+                animationProgress = newValue
                 invalidate()
             }
-            start()
         }
-    }
-
-    private fun animationUpdate(newValue: Float) {
-        animationProgress = newValue
-        invalidate()
     }
 
     private fun stopAnimation() {
-        jobAnimation?.cancel()
-        jobAnimation = null
-        valueAnimator?.cancel()
-        valueAnimator = null
+        animation?.stopAnimation()
+        animation = null
     }
 
     companion object {

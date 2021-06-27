@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
+import com.hodzi.viewcomponents.view.CustomProgressBar
 
 class MainActivity : AppCompatActivity() {
     private var currentProgress = .15f

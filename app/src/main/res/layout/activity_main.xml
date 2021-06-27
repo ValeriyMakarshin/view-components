@@ -12,7 +12,7 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <com.hodzi.viewcomponents.CustomProgressBar
+        <com.hodzi.viewcomponents.view.CustomProgressBar
             android:id="@+id/custom_progress_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -38,14 +38,14 @@
             android:layout_height="wrap_content"
             android:text="+10 progress" />
 
-        <com.hodzi.viewcomponents.CustomProgressBar
+        <com.hodzi.viewcomponents.view.CustomProgressBar
             android:id="@+id/custom_progress_test_1"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.hodzi.viewcomponents.CustomProgressBar
+        <com.hodzi.viewcomponents.view.CustomProgressBar
             android:id="@+id/custom_progress_test_2"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
             android:layout_height="wrap_content"
             android:text="View with custom stroke widths:" />
 
-        <com.hodzi.viewcomponents.CustomProgressBar
+        <com.hodzi.viewcomponents.view.CustomProgressBar
             android:id="@+id/custom_progress_test_3"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
