@@ -156,7 +156,6 @@ class CustomProgressBar @JvmOverloads constructor(
             isAntiAlias = true
             strokeCap = Paint.Cap.ROUND
             style = Paint.Style.STROKE
-            strokeWidth = PROGRESS_STROKE_WIDTH.dp()
         }
     }
 
@@ -216,7 +215,6 @@ class CustomProgressBar @JvmOverloads constructor(
     }
 
     companion object {
-        private const val PROGRESS_STROKE_WIDTH = 23
         private const val START_ANGLE = 160f
         private const val SWEEP_ANGLE = (2 * (360 - (90 + START_ANGLE)) % 360 + 360) % 360
         private const val ANIMATION_DURATION = 300L
