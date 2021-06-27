@@ -1,23 +1,15 @@
 package com.hodzi.viewcomponents.view
 
-import android.animation.ValueAnimator
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.*
-import android.provider.Settings
 import android.util.AttributeSet
 import android.view.View
-import android.view.animation.AccelerateDecelerateInterpolator
 import androidx.annotation.FloatRange
 import androidx.core.content.ContextCompat
 import com.hodzi.viewcomponents.R
 import com.hodzi.viewcomponents.animation.BaseValueAnimation
 import com.hodzi.viewcomponents.animation.ValueAnimationCombiner
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.flow
-import kotlin.math.abs
 
 
 @SuppressLint("ViewConstructor")
