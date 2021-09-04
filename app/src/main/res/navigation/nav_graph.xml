@@ -1,19 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
     app:startDestination="@id/mainFragment">
 
     <fragment
         android:id="@+id/mainFragment"
         android:name="com.hodzi.viewcomponents.ui.MainFragment"
-        android:label="MainFragment">
+        android:label="MainFragment"
+        tools:layout="@layout/fragment_main">
         <action
             android:id="@+id/open_progress_fragment"
             app:destination="@id/progressFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_chooserFragment"
+            app:destination="@id/chooserFragment" />
     </fragment>
     <fragment
         android:id="@+id/progressFragment"
         android:name="com.hodzi.viewcomponents.ui.progress.ProgressFragment"
-        android:label="ProgressFragment" />
+        android:label="ProgressFragment"
+        tools:layout="@layout/fragment_progress" />
+    <fragment
+        android:id="@+id/chooserFragment"
+        android:name="com.hodzi.viewcomponents.ui.chooser.ChooserFragment"
+        android:label="ChooserFragment"
+        tools:layout="@layout/fragment_chooser" />
 </navigation>
