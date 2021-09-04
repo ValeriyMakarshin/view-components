@@ -1,4 +1,4 @@
-package com.hodzi.viewcomponents.view
+package com.hodzi.viewcomponents.ui.progress.view
 
 import android.annotation.SuppressLint
 import android.content.Context

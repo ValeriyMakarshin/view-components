@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ViewComponents</string>
+
+    <string name="main_open_progress_bar">Progress bar</string>
 </resources>
