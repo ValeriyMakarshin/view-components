@@ -14,7 +14,7 @@
             android:id="@+id/open_progress_fragment"
             app:destination="@id/progressFragment" />
         <action
-            android:id="@+id/action_mainFragment_to_chooserFragment"
+            android:id="@+id/open_chooser_fragment"
             app:destination="@id/chooserFragment" />
     </fragment>
     <fragment
