@@ -3,11 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/motion_layout"
-    app:motionDebug="SHOW_ALL"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/scene_01"
+    app:motionDebug="SHOW_ALL"
     tools:showPaths="true">
+
+    <FrameLayout
+        android:id="@+id/next_layout"
+        android:layout_width="300dp"
+        android:layout_height="match_parent"
+        android:background="@android:color/holo_blue_light"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:text="Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test " />
+    </FrameLayout>
 
     <FrameLayout
         android:id="@+id/swipe_layout"
@@ -18,13 +35,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="24dp"
-        android:text="Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text " />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp"
+            android:background="@android:color/holo_green_light"
+            android:text="Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text " />
     </FrameLayout>
-
 
     <ImageView
         android:id="@+id/swipe_like_icon"

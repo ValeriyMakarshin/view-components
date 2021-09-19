@@ -1,26 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:motion="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <Transition
-        motion:constraintSetEnd="@+id/like"
-        motion:constraintSetStart="@+id/start"
-        motion:duration="300">
+        app:constraintSetEnd="@+id/like"
+        app:constraintSetStart="@+id/start"
+        app:duration="300">
         <OnSwipe
-            motion:dragDirection="dragRight"
-            motion:touchAnchorId="@id/swipe_layout"
-            motion:touchAnchorSide="right" />
+            app:dragDirection="dragRight"
+            app:onTouchUp="autoComplete"
+            app:touchAnchorId="@id/swipe_layout"
+            app:touchAnchorSide="right" />
     </Transition>
 
     <Transition
-        motion:constraintSetEnd="@+id/dislike"
-        motion:constraintSetStart="@+id/start"
-        motion:duration="300">
+        app:constraintSetEnd="@+id/dislike"
+        app:constraintSetStart="@+id/start"
+        app:duration="150">
         <OnSwipe
-            motion:dragDirection="dragLeft"
-            motion:touchAnchorId="@id/swipe_layout"
-            motion:touchAnchorSide="left" />
+            app:dragDirection="dragLeft"
+            app:onTouchUp="autoComplete"
+            app:touchAnchorId="@id/swipe_layout"
+            app:touchAnchorSide="left" />
     </Transition>
+
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/like_finish"
+        app:constraintSetStart="@+id/like"
+        app:duration="150" />
+
+    <Transition
+        app:autoTransition="animateToEnd"
+        app:constraintSetEnd="@+id/dislike_finish"
+        app:constraintSetStart="@+id/dislike"
+        app:duration="150" />
 
     <ConstraintSet android:id="@+id/start">
         <Constraint
@@ -30,73 +44,147 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:rotation="0.0"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="parent"
-            motion:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Constraint android:id="@id/next_layout">
+            <Transform
+                android:scaleX="0.7"
+                android:scaleY="0.7" />
+        </Constraint>
 
         <Constraint
             android:id="@id/swipe_like_icon"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="@null"
-            motion:layout_constraintStart_toEndOf="parent"
-            motion:layout_constraintStart_toStartOf="@null"
-            motion:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@null"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@null"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Constraint
             android:id="@id/swipe_dislike_icon"
             android:layout_width="64dp"
             android:layout_height="64dp"
-            motion:layout_constraintBottom_toBottomOf="parent"
-            motion:layout_constraintEnd_toEndOf="@null"
-            motion:layout_constraintEnd_toStartOf="parent"
-            motion:layout_constraintStart_toStartOf="@null"
-            motion:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@null"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@null"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </ConstraintSet>
 
     <ConstraintSet
         android:id="@+id/dislike"
-        motion:deriveConstraintsFrom="@id/start">
+        app:deriveConstraintsFrom="@id/start">
         <Constraint
             android:id="@id/swipe_layout"
             android:layout_width="300dp"
             android:layout_height="match_parent"
-            android:rotation="-15.0"
-            motion:layout_constraintEnd_toStartOf="parent"
-            motion:layout_constraintStart_toStartOf="@null" />
+            app:layout_constraintEnd_toStartOf="parent"
+            android:rotation="-10.0"
+            app:layout_constraintStart_toStartOf="@null" />
+
+        <Constraint android:id="@id/next_layout">
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
+        </Constraint>
 
         <Constraint
             android:id="@id/swipe_dislike_icon"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintEnd_toStartOf="@null"
-            motion:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@null"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
+
+    <ConstraintSet
+        android:id="@+id/dislike_finish"
+        app:deriveConstraintsFrom="@id/dislike">
+
+        <Constraint
+            android:id="@id/swipe_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.7">
+
+        </Constraint>
+        <Constraint
+            android:id="@id/swipe_dislike_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@null"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@null"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </ConstraintSet>
 
     <ConstraintSet
         android:id="@+id/like"
-        motion:deriveConstraintsFrom="@id/start">
+        app:deriveConstraintsFrom="@id/start">
 
         <Constraint
             android:id="@id/swipe_layout"
-            android:layout_width="300dp"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:rotation="15.0"
-            motion:layout_constraintEnd_toEndOf="@null"
-            motion:layout_constraintStart_toEndOf="parent" />
+            android:layout_marginStart="200dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent="0.7" />
+
+        <Constraint android:id="@id/next_layout">
+
+            <Transform
+                android:scaleX="1"
+                android:scaleY="1" />
+        </Constraint>
 
         <Constraint
             android:id="@id/swipe_like_icon"
             android:layout_width="128dp"
             android:layout_height="128dp"
-            motion:layout_constraintEnd_toEndOf="parent"
-            motion:layout_constraintStart_toEndOf="@null"
-            motion:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@null"
+            app:layout_constraintStart_toStartOf="parent" />
+    </ConstraintSet>
 
+    <ConstraintSet
+        android:id="@+id/like_finish"
+        app:deriveConstraintsFrom="@id/like">
+
+        <Constraint
+            android:id="@id/swipe_layout"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="50dp"
+            android:layout_marginBottom="80dp"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintWidth_percent="0.7">
+
+        </Constraint>
+        <Constraint
+            android:id="@id/swipe_like_icon"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@null"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@null"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </ConstraintSet>
 
