@@ -28,14 +28,18 @@ class ChooserView @JvmOverloads constructor(
         val view = inflate(getContext(), R.layout.view_chooser, this)
         val motionLayout = view.findViewById<MotionLayout>(R.id.motion_layout)
         motionLayout.setTransitionListener(object : TransitionAdapter() {
+            override fun onTransitionStarted(motionLayout: MotionLayout?, startId: Int, endId: Int) {
+                if (startId == R.id.start) {
+                    nextViewHolder?.onBind(index + 1)
+                }
+            }
+
             override fun onTransitionCompleted(p0: MotionLayout, currentId: Int) {
                 if (currentId in listOf(R.id.like_finish, R.id.dislike_finish) && p0.progress == 1f) {
                     index++
                     swipeViewHolder?.onBind(index)
-                    p0.setTransition(R.id.start, R.id.like)
-                    p0.progress = 0f
-                    onSwipe?.invoke()
-                    nextViewHolder?.onBind(index + 1)
+                    motionLayout.setTransition(R.id.start, R.id.like)
+                    motionLayout.progress = 0f
                 }
             }
         })
