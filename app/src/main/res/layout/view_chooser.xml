@@ -22,7 +22,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="24dp"
             android:text="Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test " />
     </FrameLayout>
 
@@ -38,7 +37,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="24dp"
             android:background="@android:color/holo_green_light"
             android:text="Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text " />
     </FrameLayout>
