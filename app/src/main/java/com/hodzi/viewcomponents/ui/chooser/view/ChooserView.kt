@@ -16,6 +16,10 @@ class ChooserView @JvmOverloads constructor(
     defStyleAttr: Int = 0,
 ) : FrameLayout(context, attrs, defStyleAttr) {
     private var onSwipe: (() -> Unit)? = null
+    private var adapter: Adapter<*>? = null
+    private var nextViewHolder: ViewHolder? = null
+    private var swipeViewHolder: ViewHolder? = null
+    private var index = 0
 
     private val nextContainer: ViewGroup
     private val swipeContainer: ViewGroup
@@ -26,9 +30,12 @@ class ChooserView @JvmOverloads constructor(
         motionLayout.setTransitionListener(object : TransitionAdapter() {
             override fun onTransitionCompleted(p0: MotionLayout, currentId: Int) {
                 if (currentId in listOf(R.id.like_finish, R.id.dislike_finish) && p0.progress == 1f) {
+                    index++
+                    swipeViewHolder?.onBind(index)
                     p0.setTransition(R.id.start, R.id.like)
                     p0.progress = 0f
                     onSwipe?.invoke()
+                    nextViewHolder?.onBind(index + 1)
                 }
             }
         })
@@ -36,18 +43,34 @@ class ChooserView @JvmOverloads constructor(
         swipeContainer = view.findViewById(R.id.swipe_layout)
     }
 
+    fun setAdapter(adapter: Adapter<*>) {
+        this.adapter = adapter
+        index = 0
+
+        val localNextViewHolder = adapter.createViewHolder(context)
+        nextViewHolder = localNextViewHolder
+        nextContainer.removeAllViews()
+        nextContainer.addView(localNextViewHolder.view)
+
+        val localSwipeViewHolder = adapter.createViewHolder(context)
+        swipeViewHolder = localSwipeViewHolder
+        swipeContainer.removeAllViews()
+        swipeContainer.addView(localSwipeViewHolder.view)
+
+        swipeViewHolder?.onBind(index)
+        nextViewHolder?.onBind(index + 1)
+    }
+
     fun setSwipeListener(onSwipe: () -> Unit) {
         this.onSwipe = onSwipe
     }
 
-    fun setNextView(nextView: View) {
-        nextContainer.removeAllViews()
-        nextContainer.addView(nextView)
+    abstract class ViewHolder(val view: View) {
+        abstract fun onBind(index: Int)
     }
 
-    fun setSwipeView(swipeView: View) {
-        swipeContainer.removeAllViews()
-        swipeContainer.addView(swipeView)
+    interface Adapter<T : ViewHolder> {
+        fun createViewHolder(context: Context): T
     }
 
     companion object {
