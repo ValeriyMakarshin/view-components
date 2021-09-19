@@ -4,6 +4,7 @@
     android:layout_height="match_parent">
 
     <com.hodzi.viewcomponents.ui.chooser.view.ChooserView
+        android:id="@+id/chooser_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 

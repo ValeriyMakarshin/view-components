@@ -13,16 +13,15 @@
         android:id="@+id/next_layout"
         android:layout_width="300dp"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_blue_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test " />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:text="Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test " />-->
     </FrameLayout>
 
     <FrameLayout
@@ -34,11 +33,11 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_green_light"
-            android:text="Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text " />
+<!--        <TextView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:background="@android:color/holo_green_light"-->
+<!--            android:text="Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text " />-->
     </FrameLayout>
 
     <ImageView
