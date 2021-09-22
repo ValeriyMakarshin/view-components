@@ -23,9 +23,11 @@ class MainFragment : Fragment() {
 
         navController = view.findNavController()
 
-
         view.findViewById<View>(R.id.open_progress_screen).setOnClickListener {
             navController.navigate(MainFragmentDirections.openProgressFragment())
+        }
+        view.findViewById<View>(R.id.open_chooser_screen).setOnClickListener {
+            navController.navigate(MainFragmentDirections.openChooserFragment())
         }
     }
 }

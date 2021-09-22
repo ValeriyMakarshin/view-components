@@ -19,7 +19,6 @@ class ProgressFragment : Fragment() {
 
     private val progressItems = mutableListOf<CustomProgressBar>()
 
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         return inflater.inflate(R.layout.fragment_progress, container, false)

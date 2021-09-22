@@ -8,7 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingHorizontal="16dp"
-        android:paddingTop="20dp">
+        android:paddingVertical="20dp">
 
         <Button
             android:id="@+id/open_progress_screen"
@@ -16,6 +16,14 @@
             android:layout_height="wrap_content"
             android:text="@string/main_open_progress_bar"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/open_chooser_screen"
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:text="@string/main_open_chooser"
+            app:layout_constraintTop_toBottomOf="@id/open_progress_screen" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
