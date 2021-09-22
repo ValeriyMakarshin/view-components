@@ -16,13 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:text="Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test Test " />-->
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
         android:id="@+id/swipe_layout"
@@ -31,14 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-<!--        <TextView-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="match_parent"-->
-<!--            android:background="@android:color/holo_green_light"-->
-<!--            android:text="Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text Full screen text " />-->
-    </FrameLayout>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/swipe_like_icon"
@@ -60,5 +47,4 @@
         app:layout_constraintEnd_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--    </androidx.constraintlayout.widget.ConstraintLayout>-->
 </androidx.constraintlayout.motion.widget.MotionLayout>
